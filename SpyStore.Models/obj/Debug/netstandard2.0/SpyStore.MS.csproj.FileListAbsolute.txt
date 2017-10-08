@@ -1,0 +1,6 @@
+C:\Programming\SpyStore\SpyStore.MS\bin\Debug\netstandard2.0\SpyStore.MS.deps.json
+C:\Programming\SpyStore\SpyStore.MS\bin\Debug\netstandard2.0\SpyStore.MS.dll
+C:\Programming\SpyStore\SpyStore.MS\obj\Debug\netstandard2.0\SpyStore.MS.csprojResolveAssemblyReference.cache
+C:\Programming\SpyStore\SpyStore.MS\obj\Debug\netstandard2.0\SpyStore.MS.csproj.CoreCompileInputs.cache
+C:\Programming\SpyStore\SpyStore.MS\obj\Debug\netstandard2.0\SpyStore.MS.AssemblyInfoInputs.cache
+C:\Programming\SpyStore\SpyStore.MS\obj\Debug\netstandard2.0\SpyStore.MS.AssemblyInfo.cs

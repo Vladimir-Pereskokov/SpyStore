@@ -1,0 +1,8 @@
+C:\Programming\SpyStore\SpyStore.Models\bin\Debug\netstandard2.0\SpyStore.Models.deps.json
+C:\Programming\SpyStore\SpyStore.Models\bin\Debug\netstandard2.0\SpyStore.Models.dll
+C:\Programming\SpyStore\SpyStore.Models\bin\Debug\netstandard2.0\SpyStore.Models.pdb
+C:\Programming\SpyStore\SpyStore.Models\obj\Debug\netstandard2.0\SpyStore.Models.csproj.CoreCompileInputs.cache
+C:\Programming\SpyStore\SpyStore.Models\obj\Debug\netstandard2.0\SpyStore.Models.AssemblyInfoInputs.cache
+C:\Programming\SpyStore\SpyStore.Models\obj\Debug\netstandard2.0\SpyStore.Models.AssemblyInfo.cs
+C:\Programming\SpyStore\SpyStore.Models\obj\Debug\netstandard2.0\SpyStore.Models.dll
+C:\Programming\SpyStore\SpyStore.Models\obj\Debug\netstandard2.0\SpyStore.Models.pdb
