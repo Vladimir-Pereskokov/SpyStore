@@ -167,7 +167,7 @@ namespace SpyStore.DAL.EF.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Products"," Store");
+                    b.ToTable("Products","Store");
                 });
 
             modelBuilder.Entity("SpyStore.Models.Entities.ShoppingCartRecord", b =>

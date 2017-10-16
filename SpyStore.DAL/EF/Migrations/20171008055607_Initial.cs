@@ -12,8 +12,7 @@ namespace SpyStore.DAL.EF.Migrations
             migrationBuilder.EnsureSchema(
                 name: "Store");
 
-            migrationBuilder.EnsureSchema(
-                name: " Store");
+   
 
             migrationBuilder.CreateTable(
                 name: "Categories",
@@ -49,7 +48,7 @@ namespace SpyStore.DAL.EF.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Products",
-                schema: " Store",
+                schema: "Store",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -128,7 +127,7 @@ namespace SpyStore.DAL.EF.Migrations
                     table.ForeignKey(
                         name: "FK_ShoppingCartRecords_Products_ProductID",
                         column: x => x.ProductID,
-                        principalSchema: " Store",
+                        principalSchema: "Store",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -161,7 +160,7 @@ namespace SpyStore.DAL.EF.Migrations
                     table.ForeignKey(
                         name: "FK_OrderDetails_Products_ProductID",
                         column: x => x.ProductID,
-                        principalSchema: " Store",
+                        principalSchema: "Store",
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -169,7 +168,7 @@ namespace SpyStore.DAL.EF.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryID",
-                schema: " Store",
+                schema: "Store",
                 table: "Products",
                 column: "CategoryID");
 
@@ -234,7 +233,7 @@ namespace SpyStore.DAL.EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products",
-                schema: " Store");
+                schema: "Store");
 
             migrationBuilder.DropTable(
                 name: "Customers",

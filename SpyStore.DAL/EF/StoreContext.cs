@@ -12,18 +12,32 @@ namespace SpyStore.DAL.EF
 {
     public class StoreContext : DbContext
     {
-        public StoreContext()
-        { }
+        private Boolean  prepareTests = false;
+
+        public StoreContext()         : this(false) { }
+
+
+        public StoreContext(bool prepareTests) : base()
+        { this.prepareTests = prepareTests;
+            if (!prepareTests) base.Database.Migrate();
+        }
+
 
         public StoreContext(DbContextOptions options) : base(options)
-        { }
+        {
+            try
+            { base.Database.Migrate(); }
+            catch
+            { throw; }
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(@"Server=.\SQL2016ENT;Database=SpyStore;Trusted_Connection=True;MultipleActiveResultSets=True;",
-                     options => options.ExecutionStrategy(c => new MyConnectionStrategy(c)));
+                     options => options.ExecutionStrategy(c => new MyConnectionStrategy(c, prepareTests)));
 
             }
 
@@ -68,6 +82,13 @@ namespace SpyStore.DAL.EF
                 entity.Property(o => o.ShipDate)
                 .HasDefaultValueSql("getdate()")
                 .HasColumnType("datetime");
+
+                entity.Property(o => o.OrderTotal)
+                .HasColumnType("money")
+                .HasComputedColumnSql("Store.GetOrderTotal([Id])");
+
+
+
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>

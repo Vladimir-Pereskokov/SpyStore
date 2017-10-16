@@ -29,6 +29,7 @@ namespace SpyStore.Models.Entities
         [DataType(DataType.Date), Display(Name = "Date shipped")]
         public DateTime ShipDate { get; set; }
 
-
+        [Display(Name = "Order Total")]
+        public decimal? OrderTotal {get;set;}
     }
 }

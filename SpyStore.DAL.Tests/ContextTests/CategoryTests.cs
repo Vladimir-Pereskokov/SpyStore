@@ -18,7 +18,7 @@ namespace SpyStore.DAL.Tests.ContextTests
 
         public CategoryTests()
         {
-            _db = new StoreContext();
+            _db = new StoreContext(true);
             CleanDatabase();
         }
 
@@ -151,7 +151,7 @@ namespace SpyStore.DAL.Tests.ContextTests
             var cat = new Category { CategoryName = "Foo" };
             _db.Categories.Add(cat);
             _db.SaveChanges();
-            var context = new StoreContext();
+            var context = new StoreContext(true);
             var catToDelete = new Category { Id = cat.Id };
 
             //context.Entry<Category>(catToDelete).CurrentValues.
@@ -165,6 +165,7 @@ namespace SpyStore.DAL.Tests.ContextTests
             {
                 throw e;
             }
+            
 
             var ex = Assert.Throws<DbUpdateConcurrencyException>(() =>
                    context.SaveChanges());
@@ -176,6 +177,17 @@ namespace SpyStore.DAL.Tests.ContextTests
         }
 
 
+        [Fact]
+        public void CategoryQryForFoo()
+        {
+            //Add category Foo
+            Category cat = new Category() { CategoryName = "Foo" };
+            _db.Categories.Add(cat);            
+            _db.SaveChanges();
+            var cxt = new StoreContext(true);
+            Assert.Single ( (from c in cxt.Categories where c.CategoryName == "Foo"
+                      select new { c.Id }).AsEnumerable());            
+        }
     }
 
 }

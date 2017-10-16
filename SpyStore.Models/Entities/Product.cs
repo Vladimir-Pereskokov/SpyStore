@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpyStore.Models.Entities
 {
-    [Table("Products", Schema = " Store")]
+    [Table("Products", Schema = "Store")]
     public class Product : EntityBase
     {
         public Product() : base() { }
