@@ -9,7 +9,7 @@ using SpyStore.Models.Entities;
 
 namespace SpyStore.Models.ViewModels.Base
 {
-    class ProductAndCategoryBase : EntityBase
+    public class ProductAndCategoryBase : EntityBase
     {
         public ProductAndCategoryBase() : base() { }
 

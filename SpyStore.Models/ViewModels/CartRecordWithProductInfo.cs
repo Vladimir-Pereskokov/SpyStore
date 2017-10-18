@@ -7,7 +7,7 @@ using SpyStore.Models.Entities;
 
 namespace SpyStore.Models.ViewModels
 {
-    class CartRecordWithProductInfo : Base.ProductAndCategoryBase
+    public class CartRecordWithProductInfo : Base.ProductAndCategoryBase
     {
         public CartRecordWithProductInfo() : base() { }
 

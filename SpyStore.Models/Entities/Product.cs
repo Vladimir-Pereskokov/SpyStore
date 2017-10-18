@@ -27,6 +27,9 @@ namespace SpyStore.Models.Entities
         public string ProductImage { get; set; }
 
         [MaxLength(150)]
+        public string ProductImageLarge { get; set; }
+
+        [MaxLength(150)]
         public string ProductImageThumb { get; set; }
 
         [DataType(DataType.Currency)]

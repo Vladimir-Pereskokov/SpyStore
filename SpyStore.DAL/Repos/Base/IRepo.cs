@@ -8,7 +8,7 @@ using SpyStore.Models.Entities.Base;
 
 namespace SpyStore.DAL.Repos.Base
 {
-    interface IRepo<T> where T : EntityBase
+    public interface IRepo<T> where T : EntityBase
     {
         int Count { get; }
         bool HasChanges { get; }

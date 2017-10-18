@@ -10,7 +10,7 @@ using SpyStore.Models.Entities;
 
 namespace SpyStore.Models.ViewModels
 {
-    class OrderDetailWithProductInfo :Base.ProductAndCategoryBase 
+   public class OrderDetailWithProductInfo :Base.ProductAndCategoryBase 
     {
         public OrderDetailWithProductInfo() : base() { }
 
