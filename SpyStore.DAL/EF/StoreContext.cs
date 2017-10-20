@@ -36,7 +36,7 @@ namespace SpyStore.DAL.EF
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=.\SQL2016ENT;Database=SpyStore;Trusted_Connection=True;MultipleActiveResultSets=True;",
+                optionsBuilder.UseSqlServer(@"Server=z600\SQL2016ENT;Database=SpyStore;Integrated Security=False;MultipleActiveResultSets=True;User ID=sa;Password=qazsxdrnewqwerT7;",
                      options => options.ExecutionStrategy(c => new MyConnectionStrategy(c, prepareTests)));
 
             }

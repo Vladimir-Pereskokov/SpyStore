@@ -2939,9 +2939,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\Programming\\SpyStore\\SpyStore.Models\\SpyStore.Models.csproj",
       "projectName": "SpyStore.Models",
@@ -2977,15 +2974,15 @@
     "frameworks": {
       "netstandard2.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "2.0.0"
-          },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
             "version": "2.0.0",
             "autoReferenced": true
+          },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "2.0.0"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
