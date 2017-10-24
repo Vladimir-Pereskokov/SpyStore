@@ -5015,12 +5015,15 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "C:\\Programming\\SpyStore\\spystore.dal\\SpyStore.DAL.csproj",
+      "projectUniqueName": "C:\\Programming\\SpyStore\\SpyStore.DAL\\SpyStore.DAL.csproj",
       "projectName": "SpyStore.DAL",
-      "projectPath": "C:\\Programming\\SpyStore\\spystore.dal\\SpyStore.DAL.csproj",
+      "projectPath": "C:\\Programming\\SpyStore\\SpyStore.DAL\\SpyStore.DAL.csproj",
       "packagesPath": "C:\\Users\\Vladimir\\.nuget\\packages\\",
-      "outputPath": "C:\\Programming\\SpyStore\\spystore.dal\\obj\\",
+      "outputPath": "C:\\Programming\\SpyStore\\SpyStore.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5054,12 +5057,15 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
-            "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
-          },
           "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "2.0.0"
+          },
+          "Microsoft.EntityFrameworkCore.Tools": {
+            "target": "Package",
+            "version": "2.0.0"
+          },
+          "Microsoft.EntityFrameworkCore.Tools.DotNet": {
             "target": "Package",
             "version": "2.0.0"
           },
@@ -5067,13 +5073,14 @@
             "target": "Package",
             "version": "2.0.0"
           },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "2.0.0",
+            "autoReferenced": true
+          },
           "Microsoft.EntityFrameworkCore.Relational": {
             "target": "Package",
             "version": "2.0.0"
-          },
-          "Microsoft.EntityFrameworkCore.Relational.Design": {
-            "target": "Package",
-            "version": "2.0.0-preview1-final"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
@@ -5083,13 +5090,9 @@
             "target": "Package",
             "version": "2.0.0-preview1-final"
           },
-          "Microsoft.EntityFrameworkCore.Tools": {
+          "Microsoft.EntityFrameworkCore.Relational.Design": {
             "target": "Package",
-            "version": "2.0.0"
-          },
-          "Microsoft.EntityFrameworkCore.Tools.DotNet": {
-            "target": "Package",
-            "version": "2.0.0"
+            "version": "2.0.0-preview1-final"
           }
         },
         "imports": [

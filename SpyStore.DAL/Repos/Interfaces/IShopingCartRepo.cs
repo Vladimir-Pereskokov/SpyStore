@@ -8,7 +8,7 @@ using SpyStore.Models.ViewModels.Base;
 
 namespace SpyStore.DAL.Repos.Interfaces
 {
-    public interface IShopingCartRepo:IRepo<ShoppingCartRecord>
+    public interface IShoppingCartRepo:IRepo<ShoppingCartRecord>
     {
         CartRecordWithProductInfo GetShoppingCartRecord(int customerId, int productId);
         int Purchase(int customerId);

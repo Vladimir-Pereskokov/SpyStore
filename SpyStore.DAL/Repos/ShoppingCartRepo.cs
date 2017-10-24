@@ -10,7 +10,7 @@ using SpyStore.Models.ViewModels;
 
 namespace SpyStore.DAL.Repos
 {
-    class ShoppingCartRepo : RepoBase<ShoppingCartRecord>, IShopingCartRepo
+    class ShoppingCartRepo : RepoBase<ShoppingCartRecord>, IShoppingCartRepo
 
     {
         private IProductRepo _productRepo;
@@ -21,37 +21,71 @@ namespace SpyStore.DAL.Repos
         public override IEnumerable<ShoppingCartRecord> GetAll() =>
         table.OrderByDescending(c => c.DateTimeCreated);
 
+        public override IEnumerable<ShoppingCartRecord> GetRange(int skip, int take) =>
+            base.GetRange(table.OrderByDescending(r => r.DateTimeCreated), skip, take);
 
 
 
+        
 
 
 
 
         #region "IShoppingCartRepo"
-        int IShopingCartRepo.Add(ShoppingCartRecord entity, int? quantityInStock, bool persist)
+        public int Add(ShoppingCartRecord entity, int? quantityInStock, bool persist)
+        {
+            if (entity != null)
+            {
+                var existEnt = ((IShoppingCartRepo)this).Find(entity.CustomerID, entity.ProductID);
+                if (existEnt == null)
+                {
+                    if (quantityInStock != null && entity.Quantity > quantityInStock)
+                    {
+                        throw new Exceptions.InvalidQuantityException(@"Can't add more product than available in stock");
+                    }
+                    else
+                    {
+                        return base.Add(entity, persist);
+                    }
+                }
+                existEnt.Quantity += entity.Quantity;
+                return existEnt.Quantity <= 0? Delete(existEnt, persist): Update(existEnt, quantityInStock, persist);
+            }
+            return 0;
+        }
+
+        public ShoppingCartRecord Find(int customerId, int productId) =>
+            table.FirstOrDefault(r => r.CustomerID == customerId && r.ProductID == productId);
+
+
+        public CartRecordWithProductInfo GetShoppingCartRecord(int customerId, int productId)
         {
             throw new System.NotImplementedException();
         }
 
-        ShoppingCartRecord IShopingCartRepo.Find(int customerId, int productId)
+        public int Purchase(int customerId)
         {
             throw new System.NotImplementedException();
         }
 
-        CartRecordWithProductInfo IShopingCartRepo.GetShoppingCartRecord(int customerId, int productId)
+        public int Update(ShoppingCartRecord entity, int? quantityInStock, bool persist = true)
         {
-            throw new System.NotImplementedException();
-        }
-
-        int IShopingCartRepo.Purchase(int customerId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        int IShopingCartRepo.Update(ShoppingCartRecord entity, int? quantityInStock, bool persist)
-        {
-            throw new System.NotImplementedException();
+            if (entity == null)
+                return 0;
+            else
+            {
+                if (entity.Quantity <= 0)
+                    return Delete(entity, persist);
+                else if (entity.Quantity > quantityInStock)
+                {
+                    throw new Exceptions.InvalidQuantityException(@"Can't add more products than " +
+                        "available in stock.");
+                }
+                else
+                {
+                    return base.Update(entity, persist);
+                }
+            }
         }
         #endregion
     }
