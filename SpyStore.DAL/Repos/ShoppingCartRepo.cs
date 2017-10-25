@@ -7,6 +7,9 @@ using System.Linq;
 using SpyStore.DAL.Repos.Interfaces;
 using SpyStore.Models.ViewModels.Base;
 using SpyStore.Models.ViewModels;
+using System.Data.SqlClient;
+using System;
+
 
 namespace SpyStore.DAL.Repos
 {
@@ -25,6 +28,26 @@ namespace SpyStore.DAL.Repos
             base.GetRange(table.OrderByDescending(r => r.DateTimeCreated), skip, take);
 
 
+        private CartRecordWithProductInfo GetRecord(int customerID, ShoppingCartRecord scr, Product p, Category c)
+            => new CartRecordWithProductInfo
+            {
+                Id= scr.Id,
+                DateCreated = scr.DateTimeCreated,
+                CustomerId = customerID,
+                Quantity = scr.Quantity,
+                ProductId = scr.ProductID,
+                Description = p.Description,
+                ModelName = p.ModelName,
+                ModelNumber = p.ModelNumber,
+                ProductImage = p.ProductImage,
+                ProductImageLarge = p.ProductImageLarge,
+                ProductImageThumb = p.ProductImageThumb,
+                UnitPrice  = p.UnitPrice,
+                UnitsInStock = p.UnitsInStock,
+                CategoryName = c.CategoryName,
+                LineItemTotal = scr.Quantity * p.UnitPrice,
+                TimeStamp = scr.TimeStamp 
+            };
 
         
 
@@ -59,13 +82,43 @@ namespace SpyStore.DAL.Repos
 
 
         public CartRecordWithProductInfo GetShoppingCartRecord(int customerId, int productId)
-        {
-            throw new System.NotImplementedException();
-        }
+            => table.Where(r => r.CustomerID == customerId && r.ProductID == productId)
+            .Include(c => c.Product)
+            .ThenInclude(p => p.Category)            
+            .Select(c => GetRecord(customerId, c, c.Product, c.Product.Category))
+            .FirstOrDefault();
+        public IEnumerable<CartRecordWithProductInfo> GetShoppingCartRecords(int customerId)
+            => table.Where(r => r.CustomerID == customerId)
+            .Include(r => r.Product)
+            .ThenInclude(p => p.Category)
+            .OrderBy(r => r.DateTimeCreated)
+            .Select(r => GetRecord(customerId, r, r.Product, r.Product.Category));
+
+
 
         public int Purchase(int customerId)
         {
-            throw new System.NotImplementedException();
+            var customerIdparam = new SqlParameter("@customerId", System.Data.SqlDbType.Int)
+            {
+                Direction = System.Data.ParameterDirection.Input ,
+                Value  = customerId
+            };
+            var orderIdParam = new SqlParameter("@orderId", System.Data.SqlDbType.Int)
+            {
+                Direction = System.Data.ParameterDirection.Output 
+            };
+            try
+            {
+                base.Context().Database.ExecuteSqlCommand("EXEC [Store].[PurchaseItemsInCart] @customerId, @orderId", customerIdparam, orderIdParam);
+                return (int)orderIdParam.Value;
+                
+            }
+            catch(Exception ex)
+            {
+                Console.Write(ex.ToString());
+                return -1;                
+            }
+            
         }
 
         public int Update(ShoppingCartRecord entity, int? quantityInStock, bool persist = true)

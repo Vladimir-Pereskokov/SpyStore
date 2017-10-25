@@ -69,6 +69,8 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+# Vladimir. 10/25/17
+db.lock
 
 # Chutzpah Test files
 _Chutzpah*
