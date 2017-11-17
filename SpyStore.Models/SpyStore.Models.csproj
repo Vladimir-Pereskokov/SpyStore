@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <PackageProjectUrl>http://www.apress.com</PackageProjectUrl>
+    <Authors>Vladimir Pereskokov, Phil Japikse</Authors>
+    <Description>DAL Models for SpyStore app</Description>
+    <Copyright>Vladimir Pereskokov 2017</Copyright>
     <RootNamespace>SpyStore.Models</RootNamespace>
   </PropertyGroup>
 

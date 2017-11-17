@@ -9,7 +9,7 @@ using SpyStore.DAL.Repos.Interfaces;
 
 namespace SpyStore.DAL.Repos
 {
-    class CategoryRepo : RepoBase<Category> , ICategoryRepo
+    public class CategoryRepo : RepoBase<Category> , ICategoryRepo
     {
         public CategoryRepo() : 
             base() { }

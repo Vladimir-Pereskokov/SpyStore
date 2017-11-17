@@ -15,18 +15,18 @@ namespace SpyStore.Models.Entities
         public ShoppingCartRecord() : base() { }
 
         [Required]
-        public int ProductID { get; set; }
+        public int ProductId { get; set; }
 
-        [ForeignKey(nameof(ProductID))]
+        [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime? DateTimeCreated { get; set; }
+        public DateTime? DateCreated { get; set; }
 
         [Required]
-        public int CustomerID { get; set; }
+        public int CustomerId { get; set; }
 
-        [ForeignKey(nameof(CustomerID))]
+        [ForeignKey(nameof(CustomerId))]
         public Customer Customer { get; set; }
 
         public int Quantity { get; set; }

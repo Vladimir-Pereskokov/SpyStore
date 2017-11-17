@@ -13,7 +13,7 @@ using System;
 
 namespace SpyStore.DAL.Repos
 {
-    class ShoppingCartRepo : RepoBase<ShoppingCartRecord>, IShoppingCartRepo
+    public class ShoppingCartRepo : RepoBase<ShoppingCartRecord>, IShoppingCartRepo
 
     {
         private IProductRepo _productRepo;
@@ -22,20 +22,20 @@ namespace SpyStore.DAL.Repos
         public ShoppingCartRepo(DbContextOptions<StoreContext> options,
             IProductRepo productRepo) : base(options) { _productRepo = productRepo; }
         public override IEnumerable<ShoppingCartRecord> GetAll() =>
-        table.OrderByDescending(c => c.DateTimeCreated);
+        table.OrderByDescending(c => c.DateCreated);
 
         public override IEnumerable<ShoppingCartRecord> GetRange(int skip, int take) =>
-            base.GetRange(table.OrderByDescending(r => r.DateTimeCreated), skip, take);
+            base.GetRange(table.OrderByDescending(r => r.DateCreated), skip, take);
 
 
         private CartRecordWithProductInfo GetRecord(int customerID, ShoppingCartRecord scr, Product p, Category c)
             => new CartRecordWithProductInfo
             {
                 Id= scr.Id,
-                DateCreated = scr.DateTimeCreated,
+                DateCreated = scr.DateCreated,
                 CustomerId = customerID,
                 Quantity = scr.Quantity,
-                ProductId = scr.ProductID,
+                ProductId = scr.ProductId,
                 Description = p.Description,
                 ModelName = p.ModelName,
                 ModelNumber = p.ModelNumber,
@@ -59,7 +59,7 @@ namespace SpyStore.DAL.Repos
         {
             if (entity != null)
             {
-                var existEnt = ((IShoppingCartRepo)this).Find(entity.CustomerID, entity.ProductID);
+                var existEnt = ((IShoppingCartRepo)this).Find(entity.CustomerId, entity.ProductId);
                 if (existEnt == null)
                 {
                     if (quantityInStock != null && entity.Quantity > quantityInStock)
@@ -78,20 +78,20 @@ namespace SpyStore.DAL.Repos
         }
 
         public ShoppingCartRecord Find(int customerId, int productId) =>
-            table.FirstOrDefault(r => r.CustomerID == customerId && r.ProductID == productId);
+            table.FirstOrDefault(r => r.CustomerId == customerId && r.ProductId == productId);
 
 
         public CartRecordWithProductInfo GetShoppingCartRecord(int customerId, int productId)
-            => table.Where(r => r.CustomerID == customerId && r.ProductID == productId)
+            => table.Where(r => r.CustomerId == customerId && r.ProductId == productId)
             .Include(c => c.Product)
             .ThenInclude(p => p.Category)            
             .Select(c => GetRecord(customerId, c, c.Product, c.Product.Category))
             .FirstOrDefault();
         public IEnumerable<CartRecordWithProductInfo> GetShoppingCartRecords(int customerId)
-            => table.Where(r => r.CustomerID == customerId)
+            => table.Where(r => r.CustomerId == customerId)
             .Include(r => r.Product)
             .ThenInclude(p => p.Category)
-            .OrderBy(r => r.DateTimeCreated)
+            .OrderBy(r => r.DateCreated)
             .Select(r => GetRecord(customerId, r, r.Product, r.Product.Category));
 
 

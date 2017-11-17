@@ -11,8 +11,10 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("SpyStore.Models")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Vladimir Pereskokov, Phil Japikse")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("Vladimir Pereskokov 2017")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("DAL Models for SpyStore app")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("SpyStore.Models")]

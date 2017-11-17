@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace SpyStore.DAL.EF
 {
-    class MyConnectionStrategy : ExecutionStrategy
+    public class MyExecutionStrategy : ExecutionStrategy
     {
         private bool prepareTests = false;
 
-        public MyConnectionStrategy(ExecutionStrategyDependencies context, bool prepareTests) :
+        public MyExecutionStrategy(ExecutionStrategyDependencies context, bool prepareTests) :
             this(context, prepareTests ? 0 : ExecutionStrategy.DefaultMaxRetryCount,
                 prepareTests ? new TimeSpan(0,0,15) : ExecutionStrategy.DefaultMaxDelay)
         { this.prepareTests = prepareTests; }
-        public MyConnectionStrategy(ExecutionStrategyDependencies context, int retries, TimeSpan delay) :
+        public MyExecutionStrategy(ExecutionStrategyDependencies context, int retries, TimeSpan delay) :
             base(context, retries, delay)
         { }
 

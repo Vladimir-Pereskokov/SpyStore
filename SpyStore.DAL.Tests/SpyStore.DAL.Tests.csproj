@@ -3,6 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <PackageProjectUrl>http://www.apress.com</PackageProjectUrl>
+    <Authors>Vladimir Pereskokov, Phil Japikse</Authors>
+    <Description>DAL Tests for SpyStore app</Description>
+    <Copyright>Vladimir Pereskokov 2017</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

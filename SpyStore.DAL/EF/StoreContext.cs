@@ -36,8 +36,11 @@ namespace SpyStore.DAL.EF
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=z600\SQL2016ENT;Database=SpyStore;Integrated Security=False;MultipleActiveResultSets=True;User ID=sa;Password=qazsxdrnewqwerT7;",
-                     options => options.ExecutionStrategy(c => new MyConnectionStrategy(c, prepareTests)));
+                optionsBuilder
+                    .UseSqlServer(@"Server=z600\SQL2016ENT;Database=SpyStore;Integrated Security=False;MultipleActiveResultSets=True;User ID=sa;Password=qazsxdrnewqwerT7;",
+                     (options) => {
+                         options.ExecutionStrategy(c => new MyExecutionStrategy(c, prepareTests));                         
+                     });
 
             }
 
@@ -112,11 +115,11 @@ namespace SpyStore.DAL.EF
 
             modelBuilder.Entity<ShoppingCartRecord>(entity =>
             {
-                entity.HasIndex(r => new { r.Id, r.CustomerID, r.ProductID })
+                entity.HasIndex(r => new { r.Id, r.CustomerId, r.ProductId })
                  .HasName("IDX_ShoppingCart")
                  .IsUnique();
 
-                entity.Property(e => e.DateTimeCreated)
+                entity.Property(e => e.DateCreated)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("getdate()");
 
